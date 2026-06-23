@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umme Salma Tinni — CSE Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --teal-50: #E1F5EE;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --blue-50: #E6F1FB;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --border: #e5e7eb;
+    --bg: #ffffff;
+    --bg2: #f9fafb;
+    --text: #111827;
+    --text2: #6b7280;
+    --text3: #9ca3af;
+    --radius: 10px;
+    --radius-sm: 7px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f3f4f6;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 54px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-weight: 600;
+    font-size: 14.5px;
+    margin-right: 18px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .nbtn {
+    border: none;
+    background: transparent;
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text2);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .nbtn:hover { background: #f3f4f6; color: var(--text); }
+  .nbtn.active { background: var(--purple-50); color: var(--purple-800); font-weight: 500; }
+
+  /* LAYOUT */
+  .page { display: none; }
+  .page.visible { display: block; animation: fadeUp 0.2s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .card-body { padding: 28px 32px; }
+
+  /* HERO */
+  .hero {
+    background: var(--purple-50);
+    padding: 40px 32px 32px;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--purple-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--purple-50);
+    border: 3px solid #fff;
+    flex-shrink: 0;
+  }
+  .hero-text h1 { font-size: 22px; font-weight: 600; margin-bottom: 5px; color: var(--text); }
+  .hero-text .sub { font-size: 13.5px; color: var(--purple-800); margin-bottom: 14px; line-height: 1.6; }
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; color: var(--purple-800);
+    background: #fff; border: 1px solid var(--purple-200);
+    padding: 5px 11px; border-radius: 999px;
+  }
+  .chip i { font-size: 13px; }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .stat {
+    padding: 18px 16px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n { font-size: 22px; font-weight: 600; color: var(--purple-600); }
+  .stat-l { font-size: 11.5px; color: var(--text3); margin-top: 2px; }
+
+  /* SECTION LABEL */
+  .sec-label {
+    font-size: 10.5px;
+    color: var(--text3);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  /* BIO */
+  .bio { font-size: 14px; color: var(--text2); line-height: 1.8; max-width: 620px; }
+
+  /* SKILL GRID */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .skill-icon {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .skill-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .skill-sub { font-size: 11.5px; color: var(--text3); }
+
+  /* PROJECT PREVIEW */
+  .proj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .proj-preview {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .proj-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .proj-preview h3 { font-size: 13.5px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
+  .proj-preview p { font-size: 12.5px; color: var(--text2); line-height: 1.6; }
+
+  /* FOCUS */
+  .focus-list { display: flex; flex-direction: column; gap: 9px; }
+  .focus-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .focus-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .focus-item p { font-size: 13.5px; color: var(--text2); line-height: 1.6; }
+
+  /* ABOUT CARDS */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .acard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .acard-icon {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px; font-size: 17px;
+  }
+  .acard h3 { font-size: 13.5px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
+  .acard p { font-size: 12.5px; color: var(--text2); line-height: 1.6; }
+  .skill-pill {
+    display: inline-block;
+    font-size: 12px; color: var(--text2);
+    background: var(--bg2); border: 1px solid var(--border);
+    padding: 4px 11px; border-radius: 999px;
+    margin: 3px 3px 0 0;
+  }
+
+  /* FULL PROJECTS */
+  .proj-full {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .proj-full:last-child { margin-bottom: 0; }
+  .proj-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .proj-full h3 { font-size: 14px; font-weight: 500; margin-bottom: 5px; color: var(--text); }
+  .proj-full p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 999px;
+    margin-top: 9px; margin-right: 4px;
+  }
+
+  /* TIMELINE */
+  .timeline { margin-top: 16px; }
+  .titem { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+  .tdot-wrap { display: flex; flex-direction: column; align-items: center; }
+  .tdot {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .tline { width: 1.5px; flex: 1; background: var(--border); margin-top: 5px; min-height: 22px; }
+  .tcontent { padding-top: 6px; }
+  .tcontent h3 { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
+  .tcontent p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .goal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .goal-card { border-radius: var(--radius-sm); padding: 16px; }
+  .goal-card .glabel { font-size: 11px; font-weight: 600; margin-bottom: 7px; }
+  .goal-card p { font-size: 12.5px; line-height: 1.65; }
+
+  /* CONTACT */
+  .contact-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 24px;
+    max-width: 400px;
+  }
+  .contact-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text2);
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row i { font-size: 19px; color: var(--purple-400); }
+
+  /* PAGE HEADER */
+  .page-header { margin-bottom: 20px; }
+  .page-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .page-header .eyebrow { font-size: 13px; color: var(--text3); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .skill-grid { grid-template-columns: 1fr 1fr; }
+    .proj-row { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .goal-row { grid-template-columns: 1fr; }
+    .hero { padding: 28px 20px; }
+    .card-body { padding: 20px; }
+    .container { padding: 0 16px; margin: 16px auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="brand">Umme Salma Tinni</span>
+    <button class="nbtn active" data-page="home">Home</button>
+    <button class="nbtn" data-page="about">About me</button>
+    <button class="nbtn" data-page="academic">Academic info</button>
+    <button class="nbtn" data-page="career">Career mapping</button>
+    <button class="nbtn" data-page="contact">Contact</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="home" class="page visible">
+  <div class="container">
+
+    <div class="card">
+      <div class="hero">
+        <div class="avatar">UT</div>
+        <div class="hero-text">
+          <h1>Umme Salma Tinni</h1>
+          <div class="sub">CSE Student · Daffodil International University · 7th Semester<br>Aspiring AI Engineer · ML Researcher · Creative Thinker</div>
+          <div class="chips">
+            <span class="chip"><i class="ti ti-brain"></i>AI engineering</span>
+            <span class="chip"><i class="ti ti-code"></i>Programming</span>
+            <span class="chip"><i class="ti ti-flask"></i>ML research</span>
+            <span class="chip"><i class="ti ti-palette"></i>Art &amp; design</span>
+          </div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">7th</div><div class="stat-l">Current semester</div></div>
+        <div class="stat"><div class="stat-n">2</div><div class="stat-l">Projects completed</div></div>
+        <div class="stat"><div class="stat-n">6+</div><div class="stat-l">Technical skills</div></div>
+        <div class="stat"><div class="stat-n">1</div><div class="stat-l">Research paper</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="sec-label">About me</div>
+        <p class="bio">I'm a 7th-semester Computer Science &amp; Engineering student at Daffodil International University with a passion for building intelligent systems and exploring the boundaries of machine learning. From developing software tools to conducting healthcare AI research, I enjoy turning complex problems into practical solutions — and bringing a creative eye to everything I build.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="sec-label">Technical skills</div>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="skill-icon" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-brand-python"></i></div>
+            <div><div class="skill-name">Python</div><div class="skill-sub">ML &amp; scripting</div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" style="background:var(--teal-50);color:var(--teal-600);"><i class="ti ti-code"></i></div>
+            <div><div class="skill-name">C / C++</div><div class="skill-sub">Core programming</div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" style="background:var(--blue-50);color:var(--blue-600);"><i class="ti ti-coffee"></i></div>
+            <div><div class="skill-name">Java</div><div class="skill-sub">OOP &amp; software dev</div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" style="background:var(--amber-50);color:var(--amber-600);"><i class="ti ti-brand-git"></i></div>
+            <div><div class="skill-name">Git &amp; GitHub</div><div class="skill-sub">Version control</div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-brain"></i></div>
+            <div><div class="skill-name">Machine learning</div><div class="skill-sub">Ensemble models</div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" style="background:#FBEAF0;color:#993556;"><i class="ti ti-palette"></i></div>
+            <div><div class="skill-name">Design thinking</div><div class="skill-sub">Creative &amp; visual</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="sec-label">Featured projects</div>
+        <div class="proj-row">
+          <div class="proj-preview">
+            <span class="proj-tag" style="background:var(--teal-50);color:var(--teal-800);">Software project</span>
+            <h3>Online examination system</h3>
+            <p>A full system for conducting exams online — question management, automated evaluation, and result processing.</p>
+          </div>
+          <div class="proj-preview">
+            <span class="proj-tag" style="background:var(--purple-50);color:var(--purple-800);">ML research</span>
+            <h3>Hypertension risk prediction</h3>
+            <p>Ensemble ML model to predict hypertension risk from health data, supporting early medical diagnosis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="sec-label">Currently focused on</div>
+        <div class="focus-list">
+          <div class="focus-item">
+            <div class="focus-dot" style="background:var(--purple-600);"></div>
+            <p>Deepening knowledge in AI/ML — exploring deep learning, neural networks, and advanced ensemble techniques</p>
+          </div>
+          <div class="focus-item">
+            <div class="focus-dot" style="background:var(--teal-600);"></div>
+            <p>Expanding software development skills and building portfolio-worthy projects in Python and Java</p>
+          </div>
+          <div class="focus-item">
+            <div class="focus-dot" style="background:var(--blue-600);"></div>
+            <p>Seeking internship and research opportunities in AI, machine learning, or software engineering</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div id="about" class="page">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="page-header">
+          <h2>About me</h2>
+          <div class="eyebrow">Who I am &amp; what drives me</div>
+        </div>
+        <p class="bio" style="margin-bottom:24px;">Hi, I'm Umme Salma Tinni — a CSE student at Daffodil International University with a love for programming, artificial intelligence, and art. I enjoy combining logical problem-solving with creative thinking, and my long-term goal is to grow as an AI engineer building intelligent systems for real-world impact.</p>
+        <div class="about-grid">
+          <div class="acard">
+            <div class="acard-icon" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-brain"></i></div>
+            <h3>AI &amp; machine learning</h3>
+            <p>Passionate about intelligent systems, predictive modeling, and ensemble methods.</p>
+          </div>
+          <div class="acard">
+            <div class="acard-icon" style="background:var(--teal-50);color:var(--teal-600);"><i class="ti ti-code"></i></div>
+            <h3>Programming</h3>
+            <p>Comfortable with C, C++, Java, and Python across different application domains.</p>
+          </div>
+          <div class="acard">
+            <div class="acard-icon" style="background:var(--amber-50);color:var(--amber-600);"><i class="ti ti-palette"></i></div>
+            <h3>Art &amp; creativity</h3>
+            <p>Brings a design eye to technical work — visual thinking meets engineering logic.</p>
+          </div>
+          <div class="acard">
+            <div class="acard-icon" style="background:var(--blue-50);color:var(--blue-600);"><i class="ti ti-brand-git"></i></div>
+            <h3>Version control</h3>
+            <p>Uses Git &amp; GitHub for collaborative and organised software development.</p>
+          </div>
+        </div>
+        <div class="sec-label" style="margin-top:24px;">All skills</div>
+        <div>
+          <span class="skill-pill">C</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+          <span class="skill-pill">Machine learning</span>
+          <span class="skill-pill">Ensemble models</span>
+          <span class="skill-pill">Data preprocessing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ACADEMIC ═══════════════ -->
+<div id="academic" class="page">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="page-header">
+          <h2>Academic information</h2>
+          <div class="eyebrow">Daffodil International University · BSc in CSE · 7th semester</div>
+        </div>
+        <div class="proj-full">
+          <div class="proj-icon" style="background:var(--teal-50);color:var(--teal-600);"><i class="ti ti-clipboard-check"></i></div>
+          <div>
+            <h3>Online examination system</h3>
+            <p>A software system for conducting exams online — covering question management, automated evaluation, and result processing for efficient academic assessment.</p>
+            <span class="tag" style="background:var(--teal-50);color:var(--teal-800);">Software project</span>
+            <span class="tag" style="background:var(--purple-50);color:var(--purple-800);">Python / Java</span>
+          </div>
+        </div>
+        <div class="proj-full">
+          <div class="proj-icon" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-flask"></i></div>
+          <div>
+            <h3>Hypertension risk prediction using ensemble model</h3>
+            <p>Machine learning research applying ensemble methods to predict hypertension risk from health data — supporting early diagnosis and preventive healthcare decisions.</p>
+            <span class="tag" style="background:var(--purple-50);color:var(--purple-800);">ML research</span>
+            <span class="tag" style="background:var(--blue-50);color:var(--blue-800);">Python</span>
+            <span class="tag" style="background:var(--amber-50);color:var(--amber-600);">Healthcare AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CAREER MAPPING ═══════════════ -->
+<div id="career" class="page">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="page-header">
+          <h2>Career mapping</h2>
+          <div class="eyebrow">Goal: AI engineer in healthcare, automation, or intelligent systems</div>
+        </div>
+        <div class="timeline">
+          <div class="titem">
+            <div class="tdot-wrap">
+              <div class="tdot" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-code"></i></div>
+              <div class="tline"></div>
+            </div>
+            <div class="tcontent">
+              <h3>Core programming foundations</h3>
+              <p>Built strong foundations in C, C++, Java, and Python across academic coursework and personal projects.</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="tdot-wrap">
+              <div class="tdot" style="background:var(--teal-50);color:var(--teal-600);"><i class="ti ti-clipboard-check"></i></div>
+              <div class="tline"></div>
+            </div>
+            <div class="tcontent">
+              <h3>Software development practice</h3>
+              <p>Developed a full Online Examination System, gaining hands-on experience in software design and implementation.</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="tdot-wrap">
+              <div class="tdot" style="background:var(--purple-50);color:var(--purple-600);"><i class="ti ti-brain"></i></div>
+              <div class="tline"></div>
+            </div>
+            <div class="tcontent">
+              <h3>Applied ML research</h3>
+              <p>Conducted research in hypertension risk prediction using ensemble models — gaining experience in data preprocessing, model training, and evaluation.</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="tdot-wrap">
+              <div class="tdot" style="background:var(--blue-50);color:var(--blue-600);"><i class="ti ti-brand-git"></i></div>
+            </div>
+            <div class="tcontent">
+              <h3>Collaborative development</h3>
+              <p>Adopted Git &amp; GitHub for version control and team-based software workflows.</p>
+            </div>
+          </div>
+        </div>
+        <div class="goal-row">
+          <div class="goal-card" style="background:var(--purple-50);">
+            <div class="glabel" style="color:var(--purple-600);">Short-term goals</div>
+            <p style="color:var(--purple-800);">Complete an ML certification · Contribute to open-source · Land an internship in AI or software engineering</p>
+          </div>
+          <div class="goal-card" style="background:var(--teal-50);">
+            <div class="glabel" style="color:var(--teal-600);">Long-term goals</div>
+            <p style="color:var(--teal-800);">Pursue higher studies in AI · Work as an AI/ML engineer · Build impactful systems in healthcare</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div id="contact" class="page">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="page-header">
+          <h2>Contact</h2>
+          <div class="eyebrow">Get in touch</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-row"><i class="ti ti-mail"></i>DIU student email</div>
+          <div class="contact-row"><i class="ti ti-brand-github"></i>GitHub profile</div>
+          <div class="contact-row"><i class="ti ti-brand-linkedin"></i>LinkedIn</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.nbtn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('visible'); });
+      document.querySelectorAll('.nbtn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById(btn.dataset.page).classList.add('visible');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
